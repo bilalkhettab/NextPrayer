@@ -4,8 +4,7 @@
 
 Next Prayer is a tiny macOS menu bar app that shows the next prayer and a live countdown — `Asr in 02:14` — right next to your clock. And not an estimate from an astronomical formula: it uses the exact timetable your mosque publishes on [mawaqit.net](https://mawaqit.net), the network trusted by 8,000+ mosques worldwide. When your mosque says Isha is at 22:47, your Mac says 22:47.
 
-<!-- screenshot: hero shot here once visuals are ready -->
-<!-- ![Next Prayer in the menu bar](screenshot.png) -->
+![Next Prayer: your mosque's real times, live in your menu bar](assets/app-store-visual-en.png)
 
 ## Features
 
@@ -55,6 +54,8 @@ Timetable data comes from publicly available [mawaqit.net](https://mawaqit.net) 
 <br>
 
 **Les horaires de votre mosquée, en direct dans la barre de menus du Mac.**
+
+![Next Prayer : les horaires réels de votre mosquée, juste dans votre barre de menu](assets/app-store-visual-fr.png)
 
 Next Prayer est une petite app macOS qui affiche la prochaine prière et son compte à rebours — `Asr dans 02:14` — juste à côté de l'horloge. Pas une estimation par formule : les horaires exacts que votre mosquée publie sur [mawaqit.net](https://mawaqit.net) (plus de 8 000 mosquées).
 

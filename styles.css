@@ -1,0 +1,1042 @@
+/* Next Prayer site.
+   Two palettes live here: the page's own (the icon's green and cream), and the
+   macOS panel's, which copies the system colours the app draws with so the
+   preview looks like the real thing in both appearances. */
+
+:root {
+  color-scheme: light dark;
+
+  --paper: #FFFFFF;
+  --paper-2: #F3F3F1;
+  --ink: #14231B;
+  --muted: #56645B;
+  --faint: #879189;
+  --line: rgba(20, 35, 27, .12);
+  --green: #166A43;
+  --cream: #D9D7B4;
+  --field: #166A43;            /* the stage and closer backdrop: the icon's green */
+  --scrub-night: #1D4A34;
+  --scrub-day: #E4DFBF;
+
+  --mb-h: 28px;
+  --mb-bg: rgba(255, 255, 255, .72);
+  --mb-ink: rgba(20, 35, 27, .92);
+  --mb-hi: rgba(20, 35, 27, .12);
+
+  /* macOS panel, light appearance */
+  --p-bg: #ECECEC;
+  --p-1: rgba(0, 0, 0, .85);
+  --p-2: rgba(0, 0, 0, .5);
+  --p-3: rgba(0, 0, 0, .26);
+  --p-wash: rgba(0, 0, 0, .12);
+  --p-hover: rgba(0, 0, 0, .08);
+  --p-field: rgba(0, 0, 0, .06);
+  --p-border: rgba(0, 0, 0, .09);
+  --p-section: rgba(255, 255, 255, .55);
+  --p-track: rgba(0, 0, 0, .1);
+  --p-btn: #FFFFFF;
+  --p-btn-edge: 0 0 0 .5px rgba(0, 0, 0, .14), 0 .5px 1.5px rgba(0, 0, 0, .15);
+  --p-shadow: 0 0 0 .5px rgba(0, 0, 0, .16), 0 12px 32px rgba(0, 0, 0, .18), 0 2px 6px rgba(0, 0, 0, .08);
+  --accent: #0A7AFF;
+
+  /* The page speaks Geist; the macOS chrome (menu bar, panel) keeps the
+     system font, so the preview looks like the real thing. */
+  --system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sans: "Geist", var(--system);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0F1813;
+    --paper-2: #16221B;
+    --ink: #ECEAD8;
+    --muted: #A6B0A8;
+    --faint: #717D75;
+    --line: rgba(236, 234, 216, .12);
+    --green: #5BBE8D;
+    --field: #115636;
+    --scrub-night: #0A2619;
+    --scrub-day: #B9B795;
+
+    --mb-bg: rgba(15, 24, 19, .62);
+    --mb-ink: rgba(255, 255, 255, .92);
+    --mb-hi: rgba(255, 255, 255, .16);
+
+    --p-bg: #323232;
+    --p-1: rgba(255, 255, 255, .85);
+    --p-2: rgba(255, 255, 255, .55);
+    --p-3: rgba(255, 255, 255, .25);
+    --p-wash: rgba(255, 255, 255, .08);
+    --p-hover: rgba(255, 255, 255, .06);
+    --p-field: rgba(255, 255, 255, .08);
+    --p-border: rgba(255, 255, 255, .09);
+    --p-section: rgba(255, 255, 255, .04);
+    --p-track: rgba(255, 255, 255, .16);
+    --p-btn: rgba(255, 255, 255, .2);
+    --p-btn-edge: 0 0 0 .5px rgba(0, 0, 0, .3), inset 0 .5px 0 rgba(255, 255, 255, .12);
+    --p-shadow: 0 0 0 .5px rgba(0, 0, 0, .7), inset 0 0 0 .5px rgba(255, 255, 255, .12), 0 14px 36px rgba(0, 0, 0, .5);
+  }
+}
+
+/* ---------- Base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--mb-h) + 24px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; }
+svg { fill: currentColor; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+
+:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+/* ---------- Menu bar ---------- */
+
+.menubar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: var(--mb-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 8px;
+  background: var(--mb-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  color: var(--mb-ink);
+  font-family: var(--system);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.menubar__left,
+.menubar__right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 100%;
+  min-width: 0;
+}
+
+.mb-app {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px 0 6px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.mb-app img { width: 16px; height: 16px; border-radius: 4px; }
+
+.mb-menu,
+.mb-item {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.mb-menu:hover,
+button.mb-item:hover { background: var(--mb-hi); }
+button.mb-item { cursor: pointer; }
+
+.np-item { font-variant-numeric: tabular-nums; }
+.np-item.is-open,
+.np-item[aria-expanded="true"] { background: var(--mb-hi); }
+/* The blink: hidden, not removed, so the item keeps its width. */
+.np-title.is-blank { visibility: hidden; }
+
+.mb-lang { font-size: 12px; font-weight: 600; letter-spacing: .02em; }
+.mb-glyph svg { width: 16px; height: 16px; }
+.mb-clock { font-variant-numeric: tabular-nums; }
+.clock-short { display: none; }
+
+@media (max-width: 720px) {
+  .mb-menu, .menubar .mb-glyph { display: none; }
+  .menubar .clock-long { display: none; }
+  .menubar .clock-short { display: inline; }
+}
+
+/* ---------- The panel (shared by the dropdown and the stage) ---------- */
+
+.panel {
+  width: 300px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-radius: 12px;
+  background: var(--p-bg);
+  box-shadow: var(--p-shadow);
+  color: var(--p-1);
+  font-family: var(--system);
+  font-size: 13px;
+  line-height: 16px;
+  text-align: left;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.panel[hidden] { display: none; }
+
+.panel--drop {
+  position: fixed;
+  top: calc(var(--mb-h) + 3px);
+  left: 8px;
+  z-index: 60;
+}
+.panel--drop.is-entering { animation: panel-in .14s ease-out; }
+@keyframes panel-in { from { opacity: 0; transform: translateY(-4px); } }
+
+.panel button { cursor: pointer; }
+
+/* Prayer rows */
+.p-list { display: flex; flex-direction: column; gap: 6px; }
+
+.p-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: var(--p-2);
+}
+.p-row.is-next {
+  color: var(--p-1);
+  font-weight: 500;
+  background: var(--p-wash);
+}
+.p-ic { flex: none; width: 24px; display: flex; justify-content: center; }
+.p-ic svg { width: 17px; height: 17px; }
+.p-name { flex: 1; }
+.p-time { font-variant-numeric: tabular-nums; }
+
+/* Loading placeholder: same rows, redacted, so the height doesn't jump. */
+.p-list.is-skeleton { animation: skeleton-pulse .8s ease-in-out infinite alternate; }
+.p-list.is-skeleton .p-name,
+.p-list.is-skeleton .p-time {
+  flex: none;
+  color: transparent;
+  background: var(--p-3);
+  border-radius: 4px;
+  opacity: .5;
+}
+.p-list.is-skeleton .p-name { margin-right: auto; }
+.p-list.is-skeleton .p-ic svg { opacity: .35; }
+@keyframes skeleton-pulse { from { opacity: .55; } to { opacity: 1; } }
+
+/* Mosque row + search */
+.p-picker { display: flex; flex-direction: column; }
+
+.p-mosque {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+}
+.p-mosque__glyph { flex: none; width: 24px; display: flex; justify-content: center; opacity: .75; }
+.p-mosque__glyph svg { width: 22px; height: 22px; }
+.p-mosque__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.p-mosque__name {
+  font-size: 11px;
+  line-height: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+.p-mosque__city { font-size: 10px; line-height: 13px; color: var(--p-2); }
+
+.p-glyphbtn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--p-2);
+  transition: background .12s ease-out, color .12s ease-out;
+}
+.p-glyphbtn:hover { background: var(--p-hover); color: var(--p-1); }
+.p-glyphbtn svg { width: 13px; height: 13px; }
+
+/* Collapses to zero height, like the app, so the panel resizes smoothly. */
+.p-search {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition: grid-template-rows .18s ease-in-out, opacity .18s ease-in-out, visibility 0s linear .18s;
+}
+.p-search.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition: grid-template-rows .18s ease-in-out, opacity .18s ease-in-out, visibility 0s;
+}
+.panel.no-anim .p-search { transition: none; }
+.p-search__inner {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.p-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--p-field);
+  cursor: text;
+}
+.p-field > svg { flex: none; width: 13px; height: 13px; color: var(--p-2); }
+.p-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--p-1);
+  font: inherit;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.p-field input::placeholder { color: var(--p-3); }
+.p-clear {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--p-3);
+}
+.p-clear:hover { color: var(--p-2); }
+.p-clear[hidden] { display: none; }
+.p-clear svg { width: 13px; height: 13px; }
+
+.p-sec-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px 4px;
+  font-size: 10px;
+  line-height: 13px;
+  font-weight: 600;
+  color: var(--p-2);
+}
+.p-sec-count { font-weight: 400; color: var(--p-3); font-variant-numeric: tabular-nums; }
+.p-sec-box {
+  max-height: 260px;
+  overflow: auto;
+  padding: 3px 0;
+  border: 1px solid var(--p-border);
+  border-radius: 8px;
+  background: var(--p-section);
+}
+.p-result {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: calc(100% - 6px);
+  margin: 0 3px;
+  padding: 5px 5px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  text-align: left;
+  transition: background .12s ease-out;
+}
+.p-result:hover,
+.p-result:focus-visible { background: var(--p-hover); outline: 0; }
+.p-result__name { font-size: 11px; line-height: 14px; color: var(--p-1); }
+.p-result__city { font-size: 10px; line-height: 13px; color: var(--p-2); }
+.p-empty { margin: 0; padding: 0 8px; font-size: 10px; line-height: 13px; color: var(--p-2); }
+.p-caption { margin: 0; font-size: 10px; line-height: 13px; color: var(--p-3); }
+
+/* Settings */
+.p-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 8px;
+  font-size: 11px;
+  line-height: 14px;
+}
+.p-set { display: flex; align-items: center; gap: 8px; min-height: 18px; }
+.p-set__label { flex: 1; }
+.p-set__value { color: var(--p-2); }
+
+.p-switch {
+  position: relative;
+  flex: none;
+  width: 26px;
+  height: 15px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: var(--p-track);
+  transition: background .15s ease-out;
+}
+.p-switch::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 .5px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .22);
+  transition: transform .15s ease-out;
+}
+.p-switch[aria-checked="true"] {
+  background: var(--accent);
+  background: AccentColor; /* the visitor's own accent, where the browser knows it */
+}
+.p-switch[aria-checked="true"]::after { transform: translateX(11px); }
+
+.p-seg {
+  display: inline-flex;
+  padding: 1px;
+  border-radius: 6px;
+  background: var(--p-track);
+}
+.p-seg button {
+  padding: 1px 10px 2px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--p-1);
+  font-size: 11px;
+  line-height: 14px;
+}
+.p-seg button[aria-checked="true"] {
+  background: var(--p-btn);
+  box-shadow: var(--p-btn-edge);
+}
+
+/* Footer */
+.p-foot { display: flex; align-items: center; gap: 8px; padding: 0 8px; }
+.p-updated {
+  flex: 1;
+  min-width: 0;
+  font-size: 10px;
+  line-height: 13px;
+  color: var(--p-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.p-btn {
+  padding: 2px 9px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--p-btn);
+  box-shadow: var(--p-btn-edge);
+  color: var(--p-1);
+  font-size: 11px;
+  line-height: 14px;
+  transition: filter .12s ease-out;
+}
+.p-btn:hover { filter: brightness(.96); }
+@media (prefers-color-scheme: dark) {
+  .p-btn:hover { filter: brightness(1.15); }
+}
+
+/* ---------- Hero ---------- */
+
+main { padding-top: var(--mb-h); }
+
+/* Full width, so the dunes span the window and the hint inside measures from
+   the page's own edges, which is what app.js computes its offset against. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(96px, 15vh, 150px) 16px clamp(210px, 24vw, 330px);
+  text-align: center;
+}
+.hero > :not(.dunes):not(.hint) { position: relative; z-index: 1; }
+
+/* ---------- Dunes (drawn by dunes.js) ---------- */
+
+.dunes {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .6s ease-out;
+}
+.dunes.is-drawn { opacity: 1; }
+.dunes[hidden] { display: none; }
+.dunes--hero {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: clamp(280px, 32vw, 460px);
+  /* The dunes rise out of the page and settle back into it: no edge at the
+     top where the sky meets the page, none at the bottom where the canvas ends. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 58%, transparent 96%);
+  mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 58%, transparent 96%);
+}
+.dunes--hero.is-top-down {
+  /* Sand fills the whole canvas seen from above, so keep it below the button. */
+  height: clamp(190px, 21vw, 290px);
+}
+.dunes--stage,
+.dunes--closer { inset: 0; width: 100%; height: 100%; }
+
+.hint {
+  position: absolute;
+  z-index: 2;
+  top: 4px;
+  right: var(--hint-right, 16px);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: right;
+  pointer-events: none;
+  transition: opacity .3s ease-out;
+}
+.hint__arrow { width: 64px; height: 38px; }
+/* Wraps rather than running off the left edge when the item sits mid-screen. */
+.hint span { max-width: min(19em, calc(100vw - var(--hint-right, 16px) - 74px)); margin: -2px 58px 0 0; text-wrap: balance; }
+.hint.is-done { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .hint__arrow { animation: nudge 1.8s ease-in-out infinite; }
+}
+@keyframes nudge { 50% { transform: translate(2px, -3px); } }
+
+.hero__icon {
+  width: 112px;
+  height: 112px;
+  margin-bottom: 36px;
+  border-radius: 25px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .1), 0 20px 44px -14px rgba(22, 106, 67, .55);
+}
+
+/* Two lines at most. Each clause gets its own line, sized so the longer one
+   fits the width, with a little slack: "in your menu bar. Free." is 10.1em in
+   Geist Bold, the French "dans la barre des menus. Gratuit." 14.9em. The
+   fallback font is narrower, so it fits too. */
+.hero__title {
+  margin: 0;
+  font-size: min(74px, calc((100vw - 48px) / 10.6));
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.hero__title span { display: block; }
+.hero__title:lang(fr) { font-size: min(74px, calc((100vw - 48px) / 15.5)); }
+
+.hero__lead {
+  max-width: 34em;
+  margin: 24px auto 0;
+  color: var(--muted);
+  font-size: clamp(17px, 2vw, 20px);
+  text-wrap: pretty;
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 36px;
+}
+.cta__meta { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* Apple's badge, shown as supplied: no effects of our own on it. */
+.store-badge { display: inline-block; border-radius: 10px; line-height: 0; }
+.store-badge img { display: block; width: auto; height: 54px; }
+
+/* ---------- Sections ---------- */
+
+.section-head {
+  max-width: 660px;
+  margin: 0 auto;
+  text-align: center;
+}
+.section-head h2 {
+  margin: 0;
+  font-size: clamp(30px, 4.4vw, 46px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+.section-head p {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+  text-wrap: pretty;
+}
+
+/* A day in the menu bar: compact enough to take in whole. On wide screens the
+   heading and the scrubber sit beside the Mac, so the scrubber and the panel
+   it drives are on screen together. */
+.day { padding: 64px 16px 80px; }
+@media (min-width: 1000px) {
+  .day {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-areas: "head stage" "scrub stage";
+    align-items: center;
+    column-gap: 56px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .day .section-head { grid-area: head; align-self: end; margin: 0; text-align: left; }
+  .day .stage { grid-area: stage; margin: 0; }
+  .day .scrub { grid-area: scrub; align-self: start; margin: 32px 0 0; }
+}
+
+/* The fake Mac's desktop: the dunes are its wallpaper, lit for the time of day.
+   The flat green is only what shows without WebGL. The panel is at real size. */
+.stage {
+  position: relative;
+  isolation: isolate;
+  max-width: 880px;
+  margin: 32px auto 0;
+  padding: 0 16px 40px;
+  overflow: hidden;
+  border-radius: 28px;
+  background-color: var(--field);
+}
+.stage__inner { position: relative; z-index: 1; }
+
+/* Like macOS, the bar's text flips to suit the wallpaper under it. */
+.stage__bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: var(--mb-h);
+  margin: 0 -16px;
+  padding: 0 8px;
+  background: rgba(0, 0, 0, .16);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  color: rgba(255, 255, 255, .94);
+  font-family: var(--system);
+  font-size: 13px;
+  line-height: 1;
+  transition: color .35s ease, background-color .35s ease;
+}
+.stage__bar .np-item.is-open { background: rgba(255, 255, 255, .2); }
+.stage.is-light .stage__bar { background: rgba(255, 255, 255, .26); color: rgba(0, 0, 0, .85); }
+.stage.is-light .stage__bar .np-item.is-open { background: rgba(0, 0, 0, .12); }
+.stage__bar-end { display: flex; align-items: center; gap: 2px; }
+@media (max-width: 420px) {
+  .stage__bar .clock-long { display: none; }
+  .stage__bar .clock-short { display: inline; }
+}
+
+.panel--stage { margin: 3px auto 0; transition: opacity .25s ease-out; }
+.panel--stage.is-quit { opacity: 0; }
+
+/* The scrubber */
+.scrub { max-width: 880px; margin: 36px auto 0; }
+
+.scrub__rail { position: relative; height: 78px; margin: 0 14px; }
+
+.scrub__track {
+  position: absolute;
+  top: 34px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--scrub-night);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.scrub__ticks { position: absolute; top: 48px; left: 0; right: 0; }
+.scrub__tick {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+  color: var(--faint);
+  transition: color .2s ease-out;
+}
+.scrub__tick::before {
+  content: "";
+  width: 1.5px;
+  height: 5px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: .6;
+}
+.scrub__tick svg { width: 16px; height: 16px; margin-top: 4px; }
+.scrub__tick.is-minor svg { width: 13px; height: 13px; opacity: .7; }
+.scrub__tick.is-next { color: var(--green); }
+
+.scrub__now {
+  position: absolute;
+  top: 30px;
+  left: calc(var(--now, 0) * 100%);
+  width: 2px;
+  height: 18px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: var(--ink);
+  opacity: 0;
+  transition: opacity .2s ease-out;
+}
+.scrub.is-moved .scrub__now { opacity: .5; }
+
+/* The native range input does the work (drag, keys, screen readers); it's
+   transparent, with a thumb as wide as ours so the pointer maps exactly. */
+.scrub__input {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -12px;
+  width: calc(100% + 24px);
+  margin: 0;
+  background: transparent;
+  opacity: 0;
+  cursor: pointer;
+}
+.scrub__input::-webkit-slider-runnable-track { height: 78px; background: transparent; }
+.scrub__input::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 78px; }
+.scrub__input::-moz-range-track { height: 78px; background: transparent; }
+.scrub__input::-moz-range-thumb { width: 24px; height: 78px; border: 0; background: transparent; }
+
+.scrub__thumb {
+  position: absolute;
+  top: 39px;
+  left: calc(var(--pos, 0) * 100%);
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 0 0 2px var(--green), 0 2px 6px rgba(0, 0, 0, .25);
+  pointer-events: none;
+  transition: transform .12s ease-out, box-shadow .12s ease-out;
+}
+.scrub__input:focus-visible ~ .scrub__thumb {
+  box-shadow: 0 0 0 2px var(--green), 0 0 0 7px color-mix(in srgb, var(--green) 28%, transparent);
+}
+.scrub__input:active ~ .scrub__thumb { transform: scale(1.12); }
+
+.scrub__time {
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 8px;
+  border-radius: 7px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.scrub__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  margin-top: 10px;
+  padding: 0 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.scrub__note { margin: 0; }
+.scrub__reset {
+  flex: none;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper-2);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.scrub__reset:hover { border-color: var(--green); }
+.scrub__reset[hidden] { display: none; }
+
+/* Why: a grid of features, each shown as the app draws it on a flat indigo
+   tile with sharp corners (the App Store screenshot's colour), its text
+   beneath on the page. No outlines or rules: space does the separating. */
+.why { padding: 96px 16px; }
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 20px;
+  max-width: 1040px;
+  margin: 56px auto 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 900px) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .bento { grid-template-columns: minmax(0, 1fr); } }
+
+.card { display: flex; flex-direction: column; }
+/* The UI on each tile is white in both appearances, in the system font, so it
+   reads as the app against a bright backdrop. The panel tokens are pinned to
+   their light values here for that reason. */
+.card__visual {
+  --p-bg: #FFFFFF;
+  --p-1: rgba(0, 0, 0, .85);
+  --p-2: rgba(0, 0, 0, .55);
+  --p-3: rgba(0, 0, 0, .32);
+  --p-wash: rgba(0, 0, 0, .07);
+  --p-shadow: 0 1px 2px rgba(10, 10, 60, .18), 0 14px 30px -12px rgba(10, 10, 60, .6);
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 188px;
+  padding: 20px;
+  overflow: hidden;
+  background: #3A3CBC;
+  color: var(--p-1);
+  font-family: var(--system);
+  font-size: 13px;
+  line-height: 16px;
+}
+.card__body { padding: 18px 4px 0; }
+.card h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.card p { margin: 6px 0 0; color: var(--muted); font-size: 15px; line-height: 1.5; text-wrap: pretty; }
+
+/* A corner of a Mac: the indigo is its wallpaper, the menu bar across the top,
+   its text white as macOS draws it over a dark wallpaper. */
+.card__visual--desk { place-items: start stretch; padding: 0; }
+.mini-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  height: 28px;
+  padding: 0 12px;
+  background: rgba(0, 0, 0, .16);
+  color: rgba(255, 255, 255, .95);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.mini-bar__item { padding: 3px 8px; border-radius: 5px; background: rgba(255, 255, 255, .2); }
+.mini-bar__glyph { width: 15px; height: 15px; }
+
+.mini-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: min(240px, 100%);
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--p-bg);
+  box-shadow: var(--p-shadow);
+}
+.p-ic--text { font-size: 17px; line-height: 16px; }
+.mini-panel s { text-decoration-thickness: 1.5px; }
+
+.mini-notif {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  width: min(290px, 100%);
+  padding: 11px 12px;
+  border-radius: 16px;
+  background: var(--p-bg);
+  box-shadow: var(--p-shadow);
+}
+.mini-notif img { width: 32px; height: 32px; border-radius: 8px; }
+.mini-notif__text { display: flex; flex-direction: column; min-width: 0; }
+.mini-notif__text strong { font-weight: 600; }
+.mini-notif__text span { overflow: hidden; color: var(--p-2); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.mini-notif__when { align-self: start; color: var(--p-3); font-size: 11px; }
+
+.mini-modes {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 12px 14px;
+}
+.mini-modes__label { justify-self: end; color: rgba(255, 255, 255, .8); font-size: 12px; }
+.mini-modes__item {
+  justify-self: start;
+  padding: 5px 10px;
+  border-radius: 7px;
+  background: var(--p-bg);
+  box-shadow: var(--p-shadow);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mini-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(270px, 100%);
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--p-bg);
+  box-shadow: var(--p-shadow);
+}
+/* The App Store screenshot's mint, deepened a touch to hold up on white. */
+.mini-label__icon { flex: none; width: 30px; height: 30px; color: #1FAF7D; }
+.mini-label__text { display: flex; flex-direction: column; gap: 2px; }
+.mini-label__text strong { font-weight: 600; }
+.mini-label__text span { color: var(--p-2); font-size: 12px; }
+
+/* Closer: the page's last block, holding the footer too. Midnight with indigo
+   dunes and lavender light, the App Store screenshot's colours. */
+.closer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 104px 16px 40px;
+  background-color: #171744;
+  color: #FFFFFF;
+  text-align: center;
+}
+.closer > :not(.dunes) { position: relative; z-index: 1; }
+/* Deepens the foot of the dunes so the small print stays legible where a lit
+   face runs behind it. */
+.closer::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 0;
+  height: 45%;
+  background: linear-gradient(to bottom, transparent, rgba(12, 12, 42, .8));
+  pointer-events: none;
+}
+.closer h2 {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  color: #FFFFFF;
+}
+.closer p { max-width: 30em; margin: 16px auto 32px; font-size: 18px; opacity: .85; text-wrap: pretty; }
+
+/* Footer: inside the closer, below the badge, set apart by the dunes' height
+   rather than a rule. */
+.footer {
+  max-width: 980px;
+  margin: clamp(150px, 20vw, 260px) auto 0;
+  color: rgba(255, 255, 255, .75);
+  font-size: 14px;
+}
+.footer__row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 22px; }
+.footer a { text-decoration: none; }
+.footer a:hover { color: #FFFFFF; text-decoration: underline; }
+.footer__lang button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.footer__lang button[aria-pressed="true"] { color: #FFFFFF; font-weight: 600; }
+.footer__fine { max-width: 62em; margin: 12px auto 0; color: rgba(255, 255, 255, .55); font-size: 13px; }
+
+@media (max-width: 640px) {
+  .hint { font-size: 14px; }
+  /* French is too long for a clause per line at a readable size on a phone:
+     its clauses flow as one sentence instead, balanced over two lines (22.2em
+     in all). English keeps its clean break after "Your mosque,". */
+  .hero__title:lang(fr) { font-size: calc((100vw - 32px) / 12.3); }
+  .hero__title:lang(fr) span { display: inline; }
+  .hero__icon { width: 96px; height: 96px; border-radius: 22px; margin-bottom: 28px; }
+  .day, .why { padding-top: 64px; padding-bottom: 72px; }
+  .stage { padding: 0 12px 44px; border-radius: 22px; margin-top: 32px; }
+  .stage__bar { margin: 0 -12px; }
+  .scrub__foot { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Cascade on scroll (reveal.js) ---------- */
+
+/* Rise, fade and come into focus, on a curve that starts quick and lands
+   softly: lively without dragging. --reveal-delay staggers what arrives
+   together. */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(8px);
+  transition:
+    opacity .7s cubic-bezier(.16, 1, .3, 1),
+    transform .7s cubic-bezier(.16, 1, .3, 1),
+    filter .7s cubic-bezier(.16, 1, .3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+/* The stage is big and holds a live canvas: no blur, a slight scale instead. */
+.js-reveal .stage[data-reveal] { filter: none; transform: translateY(32px) scale(.98); }
+.js-reveal [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
+
+/* Each card's piece of UI settles in a beat after its card. */
+.js-reveal .card[data-reveal] .card__visual > * {
+  opacity: 0;
+  transform: translateY(12px) scale(.96);
+  transition:
+    opacity .6s cubic-bezier(.16, 1, .3, 1),
+    transform .6s cubic-bezier(.16, 1, .3, 1);
+  transition-delay: calc(var(--reveal-delay, 0ms) + 160ms);
+}
+.js-reveal .card[data-reveal].is-in .card__visual > * { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}

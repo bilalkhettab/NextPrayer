@@ -33,7 +33,7 @@ Next Prayer is a tiny macOS menu bar app that shows the next prayer and a live c
 
 ## Privacy
 
-The App Store label reads **"Data Not Collected"** — our favorite sentence. No account, no ads, no analytics, no third-party SDKs. The app talks to exactly one place: mawaqit.net, to fetch your mosque's timetable. Full policy: [Privacy Policy](https://bilalkhettab.github.io/NextPrayer/).
+The App Store label reads **"Data Not Collected"** — our favorite sentence. No account, no ads, no analytics, no third-party SDKs. The app talks to exactly one place: mawaqit.net, to fetch your mosque's timetable. Full policy: [Privacy Policy](https://bilalkhettab.github.io/NextPrayer/privacy-policy.html).
 
 ## Support & FAQ
 
@@ -62,7 +62,7 @@ Next Prayer est une petite app macOS qui affiche la prochaine prière et son com
 
 Au programme : toute la journée en un clic, la Jumua le vendredi, un rappel facultatif 10 minutes avant chaque prière, un mode discret, et un clignotement doux dans les 10 dernières minutes.
 
-**Confidentialité :** aucune donnée collectée. Pas de compte, pas de pub, pas de statistiques. [Politique de confidentialité](https://bilalkhettab.github.io/NextPrayer/).
+**Confidentialité :** aucune donnée collectée. Pas de compte, pas de pub, pas de statistiques. [Politique de confidentialité](https://bilalkhettab.github.io/NextPrayer/privacy-policy.html).
 
 **Bientôt sur le Mac App Store.** Une question, une idée ? [Ouvrez une issue](../../issues) ou écrivez à [bilal.khettab@gmail.com](mailto:bilal.khettab@gmail.com).
 

@@ -20,11 +20,9 @@ Next Prayer is a tiny macOS menu bar app that shows the next prayer and a live c
 
 ## Download
 
-📦 **Mac App Store — coming soon.** Watch this repo to know the moment it lands.
+[![Download on the Mac App Store](https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us)](https://apps.apple.com/app/next-prayer-your-mosque/id6791569611)
 
-<!-- Once live, replace with:
-[![Download on the Mac App Store](https://developer.apple.com/assets/elements/badges/download-on-the-mac-app-store.svg)](YOUR_APP_STORE_LINK)
--->
+Free on the [Mac App Store](https://apps.apple.com/app/next-prayer-your-mosque/id6791569611). Website: [bilalkhettab.github.io/NextPrayer](https://bilalkhettab.github.io/NextPrayer/)
 
 ## Requirements
 
@@ -64,7 +62,7 @@ Au programme : toute la journée en un clic, la Jumua le vendredi, un rappel fac
 
 **Confidentialité :** aucune donnée collectée. Pas de compte, pas de pub, pas de statistiques. [Politique de confidentialité](https://bilalkhettab.github.io/NextPrayer/privacy-policy.html).
 
-**Bientôt sur le Mac App Store.** Une question, une idée ? [Ouvrez une issue](../../issues) ou écrivez à [bilal.khettab@gmail.com](mailto:bilal.khettab@gmail.com).
+**Gratuit sur le [Mac App Store](https://apps.apple.com/app/next-prayer-your-mosque/id6791569611).** Une question, une idée ? [Ouvrez une issue](../../issues) ou écrivez à [bilal.khettab@gmail.com](mailto:bilal.khettab@gmail.com).
 
 Next Prayer est une app indépendante, sans affiliation avec MAWAQIT.
 

@@ -1,0 +1,13 @@
+{
+  "name": "Next Prayer",
+  "short_name": "Next Prayer",
+  "description": "Your mosque's prayer times, live in the Mac menu bar.",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#FFFFFF",
+  "theme_color": "#166A43",
+  "icons": [
+    { "src": "assets/icon-256.png", "sizes": "256x256", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

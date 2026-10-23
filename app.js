@@ -29,7 +29,7 @@
   const T = {
     en: {
       'doc.title': "Next Prayer: your mosque's prayer times in the Mac menu bar",
-      'doc.desc': "Your mosque's real prayer times, live in the Mac menu bar. A quiet countdown, a gentle reminder, and zero tracking. Free.",
+      'doc.desc': "Free Mac app: your mosque's exact prayer times from Mawaqit, live in the menu bar. A countdown to the next salah, reminders, Jumua on Fridays, zero tracking.",
       'nav.day': 'A day',
       'nav.why': 'Why',
       'nav.privacy': 'Privacy',
@@ -64,6 +64,37 @@
       'b.dnc': 'Data Not Collected',
       'b.label': 'Privacy label on the App Store',
       'f6.d': 'No account, no ads, no analytics. The app talks to exactly one place: mawaqit.net.',
+      'nav.faq': 'FAQ',
+      'how.title': 'Set up in ten seconds.',
+      'how.lead': 'No account to create, no settings to puzzle over. Three steps and your prayer times live on your Mac.',
+      's1.t': 'Get it free',
+      's1.d': 'Download Next Prayer from the Mac App Store. It runs on any Mac with macOS 14 Sonoma or later.',
+      's2.t': 'Find your mosque',
+      's2.d': 'Search by city or by name among the 8,000+ mosques on Mawaqit: Paris, Lyon, Marseille, Brussels, London, Montréal and far beyond.',
+      's3.t': 'Get on with your day',
+      's3.d': "Next Prayer opens with your Mac and keeps the next prayer and its countdown in the menu bar. After Isha, it moves on to tomorrow's Fajr.",
+      'faq.title': 'Questions, answered.',
+      'faq.lead': 'Everything people ask before they download.',
+      'q1.q': 'Is Next Prayer really free?',
+      'q1.a': 'Yes. The whole app is free: no in-app purchases, no subscription, no ads.',
+      'q2.q': 'Where do the prayer times come from?',
+      'q2.a': "From your mosque. Next Prayer reads the timetable your mosque publishes on mawaqit.net, the network used by more than 8,000 mosques. It doesn't calculate times with an astronomical method, so it shows the times your imam actually follows.",
+      'q3.q': 'Why are the times different from my other prayer app?',
+      'q3.a': "Most prayer apps calculate times from your location with a formula. Next Prayer shows your mosque's own timetable instead. When the two disagree, Next Prayer matches your mosque.",
+      'q4.q': "My mosque doesn't show up in the search. What can I do?",
+      'q4.a': "It needs to be on mawaqit.net. Search by city as well as by name: mosques are sometimes registered under a name you wouldn't expect. If it isn't there yet, ask your mosque to join. Mawaqit is free for mosques too.",
+      'q5.q': 'Which prayers does it show?',
+      'q5.a': "Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha, with the next one counting down in the menu bar. On Fridays, your mosque's Jumua times appear as well.",
+      'q6.q': 'Can it remind me before each prayer?',
+      'q6.a': 'If you want it to. Switch on the reminder and your Mac notifies you 10 minutes before each prayer. In the final ten minutes, the countdown also blinks softly in the menu bar.',
+      'q7.q': 'Does it help during Ramadan?',
+      'q7.a': "Yes. Maghrib, the time to break the fast, counts down in your menu bar all afternoon at your mosque's exact time, and Fajr tells you when the fast begins.",
+      'q8.q': 'Which Macs does it run on?',
+      'q8.a': 'Any Mac with macOS 14 Sonoma or later. It lives in the menu bar only, with no window and no Dock icon, and opens by itself when you log in.',
+      'q9.q': 'Does Next Prayer collect my data?',
+      'q9.a': "No. No account, no ads, no analytics. The App Store privacy label reads \"Data Not Collected\". The app only contacts mawaqit.net, to fetch your mosque's timetable.",
+      'q10.q': 'Is Next Prayer made by Mawaqit?',
+      'q10.a': 'No. Next Prayer is an independent app by Bilal Khettab, not affiliated with MAWAQIT. It uses the timetables mosques publish on public mawaqit.net pages.',
       'closer.title': 'Free. Properly.',
       'closer.lead': 'The whole app. No locked features, no subscription waiting to pounce.',
       'footer.contact': 'Contact',
@@ -90,8 +121,8 @@
       'p.caption': 'In the app: 8,000+ mosques via mawaqit.net',
     },
     fr: {
-      'doc.title': 'Next Prayer : les horaires de votre mosquée dans la barre des menus du Mac',
-      'doc.desc': 'Les vrais horaires de votre mosquée, en direct dans la barre des menus du Mac. Un compte à rebours discret, un rappel, zéro pistage. Gratuit.',
+      'doc.title': 'Next Prayer : les horaires de prière de votre mosquée sur Mac',
+      'doc.desc': 'App Mac gratuite : les horaires de prière exacts de votre mosquée (Mawaqit), en direct dans la barre des menus. Compte à rebours, rappels, Jumua, zéro pistage.',
       'nav.day': 'Une journée',
       'nav.why': 'Pourquoi',
       'nav.privacy': 'Confidentialité',
@@ -125,6 +156,37 @@
       'b.dnc': 'Données non collectées',
       'b.label': "Étiquette de confidentialité de l'App Store",
       'f6.d': "Pas de compte, pas de pub, pas de statistiques. L'app ne parle qu'à un seul endroit : mawaqit.net.",
+      'nav.faq': 'FAQ',
+      'how.title': 'Prête en dix secondes.',
+      'how.lead': 'Pas de compte à créer, pas de réglages à déchiffrer. Trois étapes et vos horaires de prière vivent sur votre Mac.',
+      's1.t': 'Téléchargez-la, gratuitement',
+      's1.d': 'Installez Next Prayer depuis le Mac App Store. Elle fonctionne sur tout Mac équipé de macOS 14 Sonoma ou ultérieur.',
+      's2.t': 'Choisissez votre mosquée',
+      's2.d': 'Cherchez par ville ou par nom parmi les plus de 8 000 mosquées de Mawaqit : Paris, Lyon, Marseille, Bruxelles, Londres, Montréal et bien au-delà.',
+      's3.t': 'Vivez votre journée',
+      's3.d': "Next Prayer s'ouvre avec votre Mac et garde la prochaine prière et son compte à rebours dans la barre des menus. Après Isha, elle passe au Fajr du lendemain.",
+      'faq.title': 'Vos questions, nos réponses.',
+      'faq.lead': 'Tout ce qu’on nous demande avant de télécharger.',
+      'q1.q': 'Next Prayer est-elle vraiment gratuite ?',
+      'q1.a': "Oui. Toute l'app est gratuite : pas d'achats intégrés, pas d'abonnement, pas de pub.",
+      'q2.q': "D'où viennent les horaires de prière ?",
+      'q2.a': "De votre mosquée. Next Prayer lit les horaires que votre mosquée publie sur mawaqit.net, le réseau utilisé par plus de 8 000 mosquées. Elle ne les calcule pas avec une méthode astronomique : elle affiche les horaires que suit réellement votre imam.",
+      'q3.q': 'Pourquoi les horaires diffèrent-ils de mon autre app de prière ?',
+      'q3.a': "La plupart des apps de prière calculent les horaires à partir de votre position, avec une formule. Next Prayer affiche plutôt les horaires de votre mosquée. Quand les deux divergent, Next Prayer suit votre mosquée.",
+      'q4.q': "Ma mosquée n'apparaît pas dans la recherche. Que faire ?",
+      'q4.a': "Elle doit être inscrite sur mawaqit.net. Cherchez par ville autant que par nom : les mosquées sont parfois enregistrées sous un nom inattendu. Si elle n'y est pas encore, proposez-lui de rejoindre Mawaqit, c'est gratuit pour les mosquées aussi.",
+      'q5.q': 'Quelles prières affiche-t-elle ?',
+      'q5.a': "Fajr, le lever du soleil, Dhuhr, Asr, Maghrib et Isha, avec la prochaine en compte à rebours dans la barre des menus. Le vendredi, les horaires de la Jumua de votre mosquée s'affichent aussi.",
+      'q6.q': 'Peut-elle me prévenir avant chaque prière ?',
+      'q6.a': "Si vous le souhaitez. Activez le rappel et votre Mac vous prévient 10 minutes avant chaque prière. Dans les dix dernières minutes, le compte à rebours clignote aussi doucement dans la barre des menus.",
+      'q7.q': 'Est-elle utile pendant le Ramadan ?',
+      'q7.a': "Oui. Maghrib, l'heure de la rupture du jeûne, s'égrène dans votre barre des menus tout l'après-midi, à l'heure exacte de votre mosquée, et Fajr vous indique quand le jeûne commence.",
+      'q8.q': 'Sur quels Mac fonctionne-t-elle ?',
+      'q8.a': "Sur tout Mac équipé de macOS 14 Sonoma ou ultérieur. Elle vit uniquement dans la barre des menus, sans fenêtre ni icône dans le Dock, et s'ouvre toute seule à l'ouverture de session.",
+      'q9.q': 'Next Prayer collecte-t-elle mes données ?',
+      'q9.a': "Non. Pas de compte, pas de pub, pas de statistiques. L'étiquette de confidentialité de l'App Store indique « Données non collectées ». L'app ne contacte que mawaqit.net, pour récupérer les horaires de votre mosquée.",
+      'q10.q': 'Next Prayer est-elle éditée par Mawaqit ?',
+      'q10.a': "Non. Next Prayer est une app indépendante de Bilal Khettab, sans affiliation avec MAWAQIT. Elle utilise les horaires que les mosquées publient sur les pages publiques de mawaqit.net.",
       'closer.title': 'Gratuit, vraiment.',
       'closer.lead': "Toute l'app. Rien de verrouillé, pas d'abonnement embusqué.",
       'footer.contact': 'Contact',
@@ -177,7 +239,12 @@
 
   // ---------- State ----------
 
+  // The site has one page per language: / in English, /fr/ in French. The
+  // English page still switches to French in place for French visitors.
+  const HOME = document.documentElement.dataset.home === 'fr' ? 'fr' : 'en';
+
   function pickLang() {
+    if (HOME === 'fr') return 'fr';
     const stored = saved.get('lang');
     if (stored === 'en' || stored === 'fr') return stored;
     const first = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
@@ -821,22 +888,35 @@
     langButton.textContent = state.lang.toUpperCase();
     langButton.title = t('lang.switch');
     langButton.setAttribute('aria-label', t('lang.switch'));
-    $$('.footer__lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === state.lang)));
+    $$('.footer__lang a').forEach((a) => {
+      if (a.dataset.lang === state.lang) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
     scrub.input.setAttribute('aria-label', t('day.scrub'));
     panels.forEach((p) => p.applyText());
     scrub.key = '';
     render();
   }
 
+  /** French lives at /fr/, so switching there (or back) loads that page. */
   function setLang(lang) {
     if (lang === state.lang) return;
-    state.lang = lang;
     saved.set('lang', lang);
+    if (lang !== HOME && (lang === 'fr' || HOME === 'fr')) {
+      location.href = (HOME === 'fr' ? '../' : 'fr/') + location.hash;
+      return;
+    }
+    state.lang = lang;
     applyLang();
   }
 
   langButton.addEventListener('click', () => setLang(state.lang === 'en' ? 'fr' : 'en'));
-  $$('.footer__lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  // Real links, so search engines find both languages; the click only has to
+  // remember the choice, or swap in place when it's the page already open.
+  $$('.footer__lang a').forEach((a) => a.addEventListener('click', (e) => {
+    saved.set('lang', a.dataset.lang);
+    if (a.dataset.lang === HOME) { e.preventDefault(); setLang(a.dataset.lang); }
+  }));
 
   // ---------- The clock ----------
 
